@@ -1,29 +1,31 @@
 <script setup>
+import { ref } from 'vue'
 import PeraImageList from '@/components/organisms/PeraImageList.vue'
 import UploadButton from '@/components/atoms/UploadButton.vue'
 import IconFolderOpen from '@/components/icons/IconFolderOpen.vue'
 
-// TODO: implement
-const images = [
-  {
-    id: 1,
-    thumbnail: 'https://placehold.jp/320x320.png',
-  },
-  {
-    id: 2,
-    thumbnail: 'https://placehold.jp/320x320.png',
-  },
-  {
-    id: 3,
-    thumbnail: 'https://placehold.jp/320x320.png',
-  },
-  {
-    id: 4,
-    thumbnail: 'https://placehold.jp/320x320.png',
-  }
-]
-</script>
+const images = ref([]);
 
+const onFileSelect = (e) => {
+  const files = e.target.files
+  if (e.target instanceof HTMLInputElement) {
+    if (files.length > 0) {
+      const file = files[0]
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const image = e.target.result
+        images.value.push({
+          id: images.value.length + 1,
+          thumbnail: image
+        })
+      }
+      reader.readAsDataURL(file)
+    }
+  } else {
+    console.log(`e.target is not HTMLInputElement`)
+  }
+}
+</script>
 <template>
   <div class="uploader">
     <span class="leading-text">商品写真</span>
@@ -32,7 +34,7 @@ const images = [
       <div class="file-upload-area">
         <label for="file-upload" class="label-upload">
           <span class="icon"><icon-folder-open /></span>ファイルを選択する
-          <input type="file" id="file-upload">
+          <input type="file" accept="image/*" id="file-upload" @change="onFileSelect" ref="file">
         </label>
       </div>
       <div class="button-area">
