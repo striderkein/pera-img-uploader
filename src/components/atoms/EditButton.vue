@@ -6,17 +6,10 @@ const handleClick = () => {
 </script>
 
 <template>
-	<!--
-  <span class="edit-button">
-    <button @click="handleClick">設定</button>
-  </span>
-  -->
-  <!-- <span class="edit-button" @click="handleClick">設定</span> -->
   <button class="edit-button" @click="handleClick">設定</button>
 </template>
 
 <style scoped>
-/* .edit-button > button { */
 .edit-button {
   opacity: 0.5;
   border: none;
