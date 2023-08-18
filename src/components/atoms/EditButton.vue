@@ -9,15 +9,15 @@ function handleSettingClick() {
   console.log(`isExpand: ${isExpand.value}`)
 }
 
-function handleEditClick(arg) {
+function handleEditClick(operation) {
   isExpand.value = false;
   console.log(`isExpand: ${isExpand.value}`)
 
-  if (arg === 'left') {
+  if (operation === 'left') {
     console.log('左へ移動するよ')
-  } else if (arg === 'right') {
+  } else if (operation === 'right') {
     console.log('右へ移動するよ')
-  } else if (arg === 'delete') {
+  } else if (operation === 'delete') {
     console.log('削除するよ')
   } else {
     console.log('なんかおかしいよ')
