@@ -18,13 +18,9 @@ defineProps({
 </template>
 
 <style scoped>
-/* implement some style on your favor */
 .pera-image {
   position: relative;
   display: inline-block;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* height: 100%; */
 }
 
 .thumbnail {
@@ -33,9 +29,4 @@ defineProps({
   height: 270px;
 }
 
-.edit-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
 </style>
