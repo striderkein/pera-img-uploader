@@ -1,6 +1,7 @@
 <script setup>
 import PeraImageList from '@/components/organisms/PeraImageList.vue'
 import UploadButton from '@/components/atoms/UploadButton.vue'
+import IconFolderOpen from '@/components/icons/IconFolderOpen.vue'
 
 // TODO: implement
 const images = [
@@ -28,6 +29,12 @@ const images = [
     <span class="leading-text">商品写真</span>
     <span class="foo">
       <pera-image-list class="thumbnails" :images="images" />
+      <div class="file-upload-area">
+        <label for="file-upload" class="label-upload">
+          <span class="icon"><icon-folder-open /></span>ファイルを選択する
+          <input type="file" id="file-upload">
+        </label>
+      </div>
       <div class="button-area">
         <upload-button class="upload-button" text="保存" />
       </div>
@@ -63,7 +70,7 @@ h3 {
 .leading-text {
   width: 20vw;
   padding: 20px;
-  background-color: #FAFAFB; /* spoited */
+  background-color: #fafafb; /* spoited */
   color: #333;
   font-weight: bold;
 }
@@ -81,6 +88,32 @@ h3 {
 
 .button-area {
   padding: 20px 400px;
+}
+
+.file-upload-area {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.label-upload {
+  display: flex;
+  align-items: center;
+  border: 2px solid #aaa;
+  border-radius: 3px;
+  padding: 3px;
+  background-color: #ececed; /* spoited */
+}
+
+.label-upload > input {
+  display: none;
 }
 
 @media (min-width: 1024px) {
