@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import axios from 'axios'
+
 import PeraImageList from '@/components/organisms/PeraImageList.vue'
 import UploadButton from '@/components/atoms/UploadButton.vue'
 import IconFolderOpen from '@/components/icons/IconFolderOpen.vue'
@@ -25,6 +27,14 @@ const onFileSelect = (e) => {
     console.log(`e.target is not HTMLInputElement`)
   }
 }
+
+const upload = () => {
+  let params = new URLSearchParams();
+  params.append('images', images.value);
+  axios.post('https://httpbin.org/post', params).then(() => {
+    console.log('post通信に成功しました');
+  });
+};
 
 const deleteFile = (index) => {
   images.value.splice(index, 1)
@@ -56,7 +66,12 @@ const moveToRight = (passedIndex) => {
         </label>
       </div>
       <div class="button-area">
-        <upload-button class="upload-button" text="保存" />
+        <upload-button
+          class="upload-button"
+          text="保存"
+          :isDisable="!images.length"
+          @click="upload"
+        />
       </div>
     </span>
   </div>

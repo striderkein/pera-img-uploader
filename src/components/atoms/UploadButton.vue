@@ -1,32 +1,34 @@
 <script setup>
+import { defineProps, defineEmits } from 'vue';
+
+const emit = defineEmits(['click'])
+
 defineProps({
   text: {
     type: String,
     required: false
+  },
+  isDisable: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
 const handleClick = () => {
-  // TODO: implement
-  alert('保存ボタンが押されました')
+  emit('click')
 }
 </script>
 
 <template>
-  <button class="upload-button" @click="handleClick">{{ text }}</button>
+  <button
+    class="upload-button"
+    @click="handleClick"
+    :disabled="isDisable"
+  >{{ text }}</button>
 </template>
 
 <style scoped>
-/*
-.upload-button {
-  opacity: 0.5;
-  border: none;
-  color: white;
-  background-color: #999;
-  border-radius: 3px;
-  padding: 10px;
-}
-*/
 .upload-button {
   /* TODO: implement some style on your favor */
   width: 100%;
@@ -37,4 +39,8 @@ const handleClick = () => {
   padding: 10px;
 }
 
+.upload-button:disabled {
+  opacity: 0.5;
+  background-color: #333;
+}
 </style>
