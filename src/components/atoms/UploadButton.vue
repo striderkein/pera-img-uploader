@@ -1,4 +1,8 @@
 <script setup>
+import { defineEmits } from 'vue';
+
+const emit = defineEmits(['click'])
+
 defineProps({
   text: {
     type: String,
@@ -7,13 +11,15 @@ defineProps({
 })
 
 const handleClick = () => {
-  // TODO: implement
-  alert('保存ボタンが押されました')
+  emit('click')
 }
 </script>
 
 <template>
-  <button class="upload-button" @click="handleClick">{{ text }}</button>
+  <button
+    class="upload-button"
+    @click="handleClick"
+  >{{ text }}</button>
 </template>
 
 <style scoped>
