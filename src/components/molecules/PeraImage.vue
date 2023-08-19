@@ -6,14 +6,20 @@ defineProps({
   image: {
     type: Object,
     required: true
-  }
+  },
+  index: {
+    type: Number,
+    required: true
+  },
 })
 </script>
 
 <template>
   <span class="pera-image">
     <square-image class="thumbnail" :image="image" />
-    <edit-button class="edit-button"/>
+    <edit-button class="edit-button" :index="index"
+      @delete="$emit('delete', index)"
+    />
   </span>
 </template>
 

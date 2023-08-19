@@ -25,12 +25,16 @@ const onFileSelect = (e) => {
     console.log(`e.target is not HTMLInputElement`)
   }
 }
+
+const deleteFile = (index) => {
+  images.value.splice(index, 1)
+}
 </script>
 <template>
   <div class="uploader">
     <span class="leading-text">商品写真</span>
     <span class="foo">
-      <pera-image-list class="thumbnails" :images="images" />
+      <pera-image-list class="thumbnails" :images="images" @delete="deleteFile" />
       <div class="file-upload-area">
         <label for="file-upload" class="label-upload">
           <span class="icon"><icon-folder-open /></span>ファイルを選択する

@@ -1,15 +1,24 @@
 <script setup>
-import { ref } from 'vue';
+import { defineProps, ref } from 'vue';
 import IconTrashCan from '@/components/icons/IconTrashCan.vue'
 
 const isExpand = ref(false);
+
+const emit = defineEmits(['delete']);
+
+defineProps({
+  index: {
+    type: Number,
+    required: true
+  }
+})
 
 function handleSettingClick() {
   isExpand.value = true;
   console.log(`isExpand: ${isExpand.value}`)
 }
 
-function handleEditClick(operation) {
+const handleEditClick = (operation, index) => {
   isExpand.value = false;
   console.log(`isExpand: ${isExpand.value}`)
 
@@ -18,7 +27,7 @@ function handleEditClick(operation) {
   } else if (operation === 'right') {
     console.log('右へ移動するよ')
   } else if (operation === 'delete') {
-    console.log('削除するよ')
+    emit('delete', index)
   } else {
     console.log('なんかおかしいよ')
   }
@@ -31,7 +40,7 @@ function handleEditClick(operation) {
     <ul>
       <li @click="handleEditClick('left')"><span class="icon">←</span>左へ移動</li>
       <li @click="handleEditClick('right')"><span class="icon">→</span>右へ移動</li>
-      <li @click="handleEditClick('delete')" class="delete"><span class="icon"><icon-trash-can /></span>画像を削除</li>
+      <li @click="handleEditClick('delete', index)" class="delete"><span class="icon"><icon-trash-can /></span>画像を削除</li>
     </ul>
   </span>
 </template>
