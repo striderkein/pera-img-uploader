@@ -17,16 +17,6 @@ const handleClick = () => {
 </template>
 
 <style scoped>
-/*
-.upload-button {
-  opacity: 0.5;
-  border: none;
-  color: white;
-  background-color: #999;
-  border-radius: 3px;
-  padding: 10px;
-}
-*/
 .upload-button {
   /* TODO: implement some style on your favor */
   width: 100%;
