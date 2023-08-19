@@ -24,7 +24,7 @@ function handleSettingClick() {
 const handleEditClick = (operation, index) => {
   isExpand.value = false;
 
-  if (operation === 'left' && index > 0) {
+  if (operation === 'left') {
     emit('left', index)
   } else if (operation === 'right') {
     emit('right', index)
@@ -41,7 +41,7 @@ const handleEditClick = (operation, index) => {
   <span v-show="isExpand" class="edit-button expand">
     <ul>
       <li>
-        <button @click="handleEditClick('left', index)" class="sub-button">
+        <button @click="handleEditClick('left', index)" :disabled="index === 0" class="sub-button">
           <span class="icon">←</span>左へ移動</button
         >
       </li>
