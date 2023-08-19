@@ -6,25 +6,34 @@ defineProps({
   image: {
     type: Object,
     required: true
-  }
+  },
+  index: {
+    type: Number,
+    required: true
+  },
 })
 </script>
 
 <template>
   <span class="pera-image">
-    <square-image class="thumbnail" :image="image" />
-    <edit-button class="edit-button"/>
+    <square-image
+      class="thumbnail"
+      :image="image"
+    />
+    <edit-button
+      class="edit-button"
+      :index="index"
+      @left="$emit('left', index)"
+      @right="$emit('right', index)"
+      @delete="$emit('delete', index)"
+    />
   </span>
 </template>
 
 <style scoped>
-/* implement some style on your favor */
 .pera-image {
   position: relative;
   display: inline-block;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* height: 100%; */
 }
 
 .thumbnail {
@@ -33,9 +42,4 @@ defineProps({
   height: 270px;
 }
 
-.edit-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
 </style>
