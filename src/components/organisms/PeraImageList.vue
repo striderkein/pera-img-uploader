@@ -16,6 +16,8 @@ defineProps({
         <pera-image
           :image="image"
           :index="index"
+          @left="$emit('left', index)"
+          @right="$emit('right', index)"
           @delete="$emit('delete', index)"
         />
       </li>

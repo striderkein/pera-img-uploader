@@ -23,6 +23,8 @@ defineProps({
     <edit-button
       class="edit-button"
       :index="index"
+      @left="$emit('left', index)"
+      @right="$emit('right', index)"
       @delete="$emit('delete', index)"
     />
   </span>

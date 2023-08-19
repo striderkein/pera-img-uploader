@@ -4,7 +4,11 @@ import IconTrashCan from '@/components/icons/IconTrashCan.vue'
 
 const isExpand = ref(false);
 
-const emit = defineEmits(['delete']);
+const emit = defineEmits([
+  'left',
+  'right',
+  'delete'
+]);
 
 defineProps({
   index: {
@@ -22,10 +26,10 @@ const handleEditClick = (operation, index) => {
   isExpand.value = false;
   console.log(`isExpand: ${isExpand.value}`)
 
-  if (operation === 'left') {
-    console.log('左へ移動するよ')
+  if (operation === 'left' && index > 0) {
+    emit('left', index)
   } else if (operation === 'right') {
-    console.log('右へ移動するよ')
+    emit('right', index)
   } else if (operation === 'delete') {
     emit('delete', index)
   } else {
@@ -38,9 +42,9 @@ const handleEditClick = (operation, index) => {
   <button v-show="!isExpand" class="edit-button" @click="handleSettingClick">設定</button>
   <span v-show="isExpand" class="edit-button expand">
     <ul>
-      <li @click="handleEditClick('left')"><span class="icon">←</span>左へ移動</li>
-      <li @click="handleEditClick('right')"><span class="icon">→</span>右へ移動</li>
-      <li @click="handleEditClick('delete', index)" class="delete"><span class="icon"><icon-trash-can /></span>画像を削除</li>
+      <li><button @click="handleEditClick('left', index)" class="sub-button"><span class="icon">←</span>左へ移動</button></li>
+      <li><button @click="handleEditClick('right', index)" class="sub-button"><span class="icon">→</span>右へ移動</button></li>
+      <li><button @click="handleEditClick('delete', index)" class="sub-button delete"><span class="icon"><icon-trash-can /></span>画像を削除</button></li>
     </ul>
   </span>
 </template>
@@ -73,6 +77,12 @@ const handleEditClick = (operation, index) => {
 
 .edit-button.expand ul li:not(:last-child) {
   border-bottom: 1px solid #000;
+}
+
+.sub-button {
+  border: none;
+  outline: none;
+  background: transparent;
 }
 
 li.delete {
