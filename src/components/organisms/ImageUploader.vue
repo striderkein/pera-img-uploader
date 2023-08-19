@@ -34,7 +34,11 @@ const deleteFile = (index) => {
   <div class="uploader">
     <span class="leading-text">商品写真</span>
     <span class="foo">
-      <pera-image-list class="thumbnails" :images="images" @delete="deleteFile" />
+      <pera-image-list
+        class="thumbnails"
+        :images="images"
+        @delete="deleteFile"
+      />
       <div class="file-upload-area">
         <label for="file-upload" class="label-upload">
           <span class="icon"><icon-folder-open /></span>ファイルを選択する

@@ -16,8 +16,13 @@ defineProps({
 
 <template>
   <span class="pera-image">
-    <square-image class="thumbnail" :image="image" />
-    <edit-button class="edit-button" :index="index"
+    <square-image
+      class="thumbnail"
+      :image="image"
+    />
+    <edit-button
+      class="edit-button"
+      :index="index"
       @delete="$emit('delete', index)"
     />
   </span>

@@ -13,7 +13,9 @@ defineProps({
   <span class="hoge">
     <ul class="fuga">
       <li v-for="(image, index) in images" :key="image.id">
-        <pera-image :image="image" :index="index"
+        <pera-image
+          :image="image"
+          :index="index"
           @delete="$emit('delete', index)"
         />
       </li>
