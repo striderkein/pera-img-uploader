@@ -19,12 +19,10 @@ defineProps({
 
 function handleSettingClick() {
   isExpand.value = true;
-  console.log(`isExpand: ${isExpand.value}`)
 }
 
 const handleEditClick = (operation, index) => {
   isExpand.value = false;
-  console.log(`isExpand: ${isExpand.value}`)
 
   if (operation === 'left' && index > 0) {
     emit('left', index)
