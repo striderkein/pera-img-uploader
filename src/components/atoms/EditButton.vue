@@ -40,9 +40,21 @@ const handleEditClick = (operation, index) => {
   <button v-show="!isExpand" class="edit-button" @click="handleSettingClick">設定</button>
   <span v-show="isExpand" class="edit-button expand">
     <ul>
-      <li><button @click="handleEditClick('left', index)" class="sub-button"><span class="icon">←</span>左へ移動</button></li>
-      <li><button @click="handleEditClick('right', index)" class="sub-button"><span class="icon">→</span>右へ移動</button></li>
-      <li><button @click="handleEditClick('delete', index)" class="sub-button delete"><span class="icon"><icon-trash-can /></span>画像を削除</button></li>
+      <li>
+        <button @click="handleEditClick('left', index)" class="sub-button">
+          <span class="icon">←</span>左へ移動</button
+        >
+      </li>
+      <li>
+        <button @click="handleEditClick('right', index)" class="sub-button">
+          <span class="icon">→</span>右へ移動</button
+        >
+      </li>
+      <li>
+        <button @click="handleEditClick('delete', index)" class="sub-button delete">
+          <span class="icon"><icon-trash-can /></span>画像を削除</button
+        >
+      </li>
     </ul>
   </span>
 </template>
