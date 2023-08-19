@@ -7,6 +7,11 @@ defineProps({
   text: {
     type: String,
     required: false
+  },
+  isDisable: {
+    type: Boolean,
+    required: false,
+    default: false
   }
 })
 
@@ -19,6 +24,7 @@ const handleClick = () => {
   <button
     class="upload-button"
     @click="handleClick"
+    :disabled="isDisable"
   >{{ text }}</button>
 </template>
 
@@ -33,4 +39,8 @@ const handleClick = () => {
   padding: 10px;
 }
 
+.upload-button:disabled {
+  opacity: 0.5;
+  background-color: #333;
+}
 </style>

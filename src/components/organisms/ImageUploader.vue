@@ -69,6 +69,7 @@ const moveToRight = (passedIndex) => {
         <upload-button
           class="upload-button"
           text="保存"
+          :isDisable="!images.length"
           @click="upload"
         />
       </div>
