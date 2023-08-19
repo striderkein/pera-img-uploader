@@ -12,8 +12,14 @@ defineProps({
 <template>
   <span class="hoge">
     <ul class="fuga">
-      <li v-for="image in images" :key="image.id">
-        <pera-image :image="image" />
+      <li v-for="(image, index) in images" :key="image.id">
+        <pera-image
+          :image="image"
+          :index="index"
+          @left="$emit('left', index)"
+          @right="$emit('right', index)"
+          @delete="$emit('delete', index)"
+        />
       </li>
     </ul>
   </span>

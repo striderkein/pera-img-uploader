@@ -1,35 +1,77 @@
 <script setup>
+import { ref } from 'vue'
+import axios from 'axios'
+
 import PeraImageList from '@/components/organisms/PeraImageList.vue'
 import UploadButton from '@/components/atoms/UploadButton.vue'
+import IconFolderOpen from '@/components/icons/IconFolderOpen.vue'
 
-// TODO: implement
-const images = [
-  {
-    id: 1,
-    thumbnail: 'https://placehold.jp/320x320.png',
-  },
-  {
-    id: 2,
-    thumbnail: 'https://placehold.jp/320x320.png',
-  },
-  {
-    id: 3,
-    thumbnail: 'https://placehold.jp/320x320.png',
-  },
-  {
-    id: 4,
-    thumbnail: 'https://placehold.jp/320x320.png',
+const images = ref([]);
+
+const onFileSelect = (e) => {
+  const files = e.target.files
+  if (e.target instanceof HTMLInputElement) {
+    if (files.length > 0) {
+      const file = files[0]
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const image = e.target.result
+        images.value.push({
+          id: images.value.length + 1,
+          thumbnail: image
+        })
+      }
+      reader.readAsDataURL(file)
+    }
+  } else {
+    console.log(`e.target is not HTMLInputElement`)
   }
-]
-</script>
+}
 
+const upload = () => {
+  let params = new URLSearchParams();
+  params.append('images', images.value);
+  axios.post('https://httpbin.org/post', params).then(() => {
+    console.log('post通信に成功しました');
+  });
+};
+
+const deleteFile = (index) => {
+  images.value.splice(index, 1)
+}
+
+const moveToLeft = (passedIndex) => {
+  images.value.splice(passedIndex - 1, 0, images.value.splice(passedIndex, 1)[0]);
+}
+
+const moveToRight = (passedIndex) => {
+  images.value.splice(passedIndex + 1, 0, images.value.splice(passedIndex, 1)[0]);
+}
+</script>
 <template>
   <div class="uploader">
     <span class="leading-text">商品写真</span>
     <span class="foo">
-      <pera-image-list class="thumbnails" :images="images" />
+      <pera-image-list
+        class="thumbnails"
+        :images="images"
+        @left="moveToLeft"
+        @right="moveToRight"
+        @delete="deleteFile"
+      />
+      <div class="file-upload-area">
+        <label for="file-upload" class="label-upload">
+          <span class="icon"><icon-folder-open /></span>ファイルを選択する
+          <input type="file" accept="image/*" id="file-upload" @change="onFileSelect" ref="file">
+        </label>
+      </div>
       <div class="button-area">
-        <upload-button class="upload-button" text="保存" />
+        <upload-button
+          class="upload-button"
+          text="保存"
+          :isDisable="!images.length"
+          @click="upload"
+        />
       </div>
     </span>
   </div>
@@ -63,7 +105,7 @@ h3 {
 .leading-text {
   width: 20vw;
   padding: 20px;
-  background-color: #FAFAFB; /* spoited */
+  background-color: #fafafb; /* spoited */
   color: #333;
   font-weight: bold;
 }
@@ -81,6 +123,32 @@ h3 {
 
 .button-area {
   padding: 20px 400px;
+}
+
+.file-upload-area {
+  display: flex;
+  justify-content: start;
+  flex-direction: row;
+  padding: 20px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.label-upload {
+  display: flex;
+  align-items: center;
+  border: 2px solid #aaa;
+  border-radius: 3px;
+  padding: 3px;
+  background-color: #ececed; /* spoited */
+}
+
+.label-upload > input {
+  display: none;
 }
 
 @media (min-width: 1024px) {
