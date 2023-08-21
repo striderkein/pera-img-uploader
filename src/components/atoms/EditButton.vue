@@ -17,7 +17,7 @@ defineProps({
   }
 })
 
-function handleSettingClick() {
+const handleSettingClick = () => {
   isExpand.value = true;
 }
 
