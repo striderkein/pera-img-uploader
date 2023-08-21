@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 import IconTrashCan from '@/components/icons/IconTrashCan.vue'
 
 const isExpand = ref(false);
