@@ -95,7 +95,7 @@ const handleEditClick = (operation, index) => {
   background: transparent;
 }
 
-li.delete {
+.sub-button.delete {
   color: #F00;
 }
 
