@@ -59,7 +59,7 @@ const handleEditClick = (operation, index) => {
   </span>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .edit-button {
   opacity: 0.5;
   border: none;
@@ -71,32 +71,32 @@ const handleEditClick = (operation, index) => {
   position: absolute;
   top: 10px;
   right: 10px;
-}
 
-.edit-button.expand {
-  color: #333;
-  opacity: unset;
-  background-color: #fff;
-}
+  &.expand {
+    color: #333;
+    opacity: unset;
+    background-color: #fff;
 
-.edit-button.expand ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
 
-.edit-button.expand ul li:not(:last-child) {
-  border-bottom: 1px solid #000;
+      li:not(:last-child) {
+        border-bottom: 1px solid #000;
+      }
+    }
+  }
 }
 
 .sub-button {
   border: none;
   outline: none;
   background: transparent;
-}
 
-.sub-button.delete {
-  color: #F00;
+  &.delete {
+    color: #F00;
+  }
 }
 
 .icon {
