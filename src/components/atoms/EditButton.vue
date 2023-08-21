@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, ref } from 'vue';
+import { ref } from 'vue';
 import IconTrashCan from '@/components/icons/IconTrashCan.vue'
 
 const isExpand = ref(false);
@@ -17,7 +17,7 @@ defineProps({
   }
 })
 
-function handleSettingClick() {
+const handleSettingClick = () => {
   isExpand.value = true;
 }
 
@@ -95,7 +95,7 @@ const handleEditClick = (operation, index) => {
   background: transparent;
 }
 
-li.delete {
+.sub-button.delete {
   color: #F00;
 }
 
