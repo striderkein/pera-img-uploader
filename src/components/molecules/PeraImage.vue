@@ -30,7 +30,7 @@ defineProps({
   </span>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .pera-image {
   position: relative;
   display: inline-block;

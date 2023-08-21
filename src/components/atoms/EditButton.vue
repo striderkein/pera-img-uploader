@@ -59,7 +59,7 @@ const handleEditClick = (operation, index) => {
   </span>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .edit-button {
   opacity: 0.5;
   border: none;

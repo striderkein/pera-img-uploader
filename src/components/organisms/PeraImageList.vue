@@ -25,7 +25,7 @@ defineProps({
   </span>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .fuga {
   list-style: none;
   display: flex;

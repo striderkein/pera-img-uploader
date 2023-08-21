@@ -14,7 +14,7 @@ import ImageUploader from '@/components/organisms/ImageUploader.vue'
   </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
   line-height: 1.5;
 }

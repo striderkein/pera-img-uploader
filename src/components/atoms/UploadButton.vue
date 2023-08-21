@@ -26,7 +26,7 @@ const handleClick = () => {
   >{{ text }}</button>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .upload-button {
   /* TODO: implement some style on your favor */
   width: 100%;
