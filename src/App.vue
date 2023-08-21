@@ -15,8 +15,23 @@ import ImageUploader from '@/components/organisms/ImageUploader.vue'
 </template>
 
 <style lang="scss" scoped>
+$breakpoint: 768px;
+
 header {
   line-height: 1.5;
+
+  @media (min-width: #{ $breakpoint }) {
+    display: flex;
+    /* place-items: center; */
+    /* padding-right: calc(var(--section-gap) / 2); */
+    justify-content: center;
+
+    .wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
 }
 
 .logo-container {
@@ -29,24 +44,9 @@ header {
   display: block;
   /* width: 100%; */
   margin: 0 auto 2rem;
-}
 
-@media (min-width: 768px) {
-  header {
-    display: flex;
-    /* place-items: center; */
-    /* padding-right: calc(var(--section-gap) / 2); */
-    justify-content: center;
-  }
-
-  .logo {
+  @media (min-width: 768px) {
     margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 }
 </style>
