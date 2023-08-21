@@ -30,9 +30,9 @@ defineProps({
   list-style: none;
   display: flex;
   justify-content: center;
-}
 
-.fuga li:not(:last-child) {
-  margin-right: 20px;
+  li:not(:last-child) {
+    margin-right: 20px;
+  }
 }
 </style>
