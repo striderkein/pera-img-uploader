@@ -15,12 +15,12 @@ import ImageUploader from '@/components/organisms/ImageUploader.vue'
 </template>
 
 <style lang="scss" scoped>
-$breakpoint: 768px;
+@import './assets/_breakpoints';
 
 header {
   line-height: 1.5;
 
-  @media (min-width: #{ $breakpoint }) {
+  @media (min-width: #{ $breakpoint-ipad }) {
     display: flex;
     /* place-items: center; */
     /* padding-right: calc(var(--section-gap) / 2); */
