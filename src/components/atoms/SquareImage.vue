@@ -32,12 +32,12 @@ h3 {
 
 .square-image {
   height: 100%;
-}
 
-.square-image > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 @media (min-width: 1024px) {
