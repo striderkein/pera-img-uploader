@@ -119,9 +119,10 @@ h3 {
 
 .thumbnails {
   width: 100%;
+  height: $side-length-of-image; /* should equal to the height of the image */
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
+  overflow: scroll hidden;
   padding: 0 20px;
 }
 
