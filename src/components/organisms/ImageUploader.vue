@@ -126,7 +126,7 @@ h3 {
 }
 
 .button-area {
-  padding: 20px 400px;
+  padding: 20px 10vw;
 }
 
 .file-upload-area {
