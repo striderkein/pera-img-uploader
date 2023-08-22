@@ -23,10 +23,6 @@ const readFile = (file) => {
 const onFileSelect = (e) => {
   isEnter.value = false;
   const files = e.target.files || e.dataTransfer.files
-  if (e.target instanceof HTMLInputElement) {
-    console.log(`e.target is not HTMLInputElement`)
-    return
-  }
 
   for (const file of files) {
     readFile(file).then((image) => {
@@ -92,7 +88,14 @@ const moveToRight = (passedIndex) => {
       <div class="file-upload-area">
         <label for="file-upload" class="label-upload">
           <span class="icon"><icon-folder-open /></span>ファイルを選択する
-          <input type="file" accept="image/*" id="file-upload" @change="onFileSelect" ref="file">
+          <input
+            type="file"
+            accept="image/*"
+            id="file-upload"
+            @change="onFileSelect"
+            ref="file"
+            multiple
+          >
         </label>
       </div>
       <div class="button-area">
