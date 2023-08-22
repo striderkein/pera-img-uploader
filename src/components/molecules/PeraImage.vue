@@ -31,6 +31,8 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
+@import '../../assets/_variables.scss';
+
 .pera-image {
   position: relative;
   display: inline-block;
@@ -38,8 +40,8 @@ defineProps({
 
 .thumbnail {
   display: inline-block;
-  width: 270px;
-  height: 270px;
+  width: $side-length-of-image;
+  height: $side-length-of-image;
 }
 
 </style>

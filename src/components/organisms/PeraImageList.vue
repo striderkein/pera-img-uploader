@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <span class="hoge">
+  <span>
     <ul class="fuga">
       <li v-for="(image, index) in images" :key="image.id">
         <pera-image
@@ -26,13 +26,17 @@ defineProps({
 </template>
 
 <style lang="scss" scoped>
+@import '../../assets/_variables.scss';
+
 .fuga {
+  width: 100%;
   list-style: none;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 0;
 
   li:not(:last-child) {
-    margin-right: 20px;
+    margin-right: $margin-each-images;
   }
 }
 </style>

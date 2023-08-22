@@ -78,6 +78,8 @@ const moveToRight = (passedIndex) => {
 </template>
 
 <style lang="scss" scoped>
+@import '../../assets/_variables.scss';
+
 h1 {
   font-weight: 500;
   font-size: 2.6rem;
@@ -103,7 +105,7 @@ h3 {
 }
 
 .leading-text {
-  width: 20vw;
+  width: $percentage-of-leading-text;
   padding: 20px;
   background-color: #fafafb; /* spoited */
   color: #333;
@@ -111,18 +113,20 @@ h3 {
 }
 
 .foo {
+  width: $percentage-of-image-area;
   padding: 30px 0;
 }
 
 .thumbnails {
-  width: 80vw;
+  width: 100%;
   display: flex;
-  justify-content: center;
   flex-direction: row;
+  overflow-x: scroll;
+  padding: 0 20px;
 }
 
 .button-area {
-  padding: 20px 400px;
+  padding: 20px 10vw;
 }
 
 .file-upload-area {
