@@ -118,12 +118,18 @@ h3 {
 }
 
 .thumbnails {
+  $padding-vertical: 10px;
+
+  box-sizing: border-box;
   width: 100%;
-  height: $side-length-of-image; /* should equal to the height of the image */
+  height: calc(#{$side-length-of-image} + #{$padding-vertical} * 2);
   display: flex;
   flex-direction: row;
   overflow: scroll hidden;
-  padding: 0 20px;
+  margin-left: 20px;
+  padding: $padding-vertical 20px;
+  background-color: #eee;
+  border: 2px solid #ccc;
 }
 
 .button-area {
