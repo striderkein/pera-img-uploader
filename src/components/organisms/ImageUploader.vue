@@ -7,24 +7,30 @@ import UploadButton from '@/components/atoms/UploadButton.vue'
 import IconFolderOpen from '@/components/icons/IconFolderOpen.vue'
 
 const images = ref([]);
+const isEnter = ref(false);
+
+const readFile = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const image = e.target.result
+      resolve(image)
+    }
+    reader.readAsDataURL(file)
+  })
+}
 
 const onFileSelect = (e) => {
-  const files = e.target.files
-  if (e.target instanceof HTMLInputElement) {
-    if (files.length > 0) {
-      const file = files[0]
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const image = e.target.result
-        images.value.push({
-          id: images.value.length + 1,
-          thumbnail: image
-        })
-      }
-      reader.readAsDataURL(file)
-    }
-  } else {
-    console.log(`e.target is not HTMLInputElement`)
+  isEnter.value = false;
+  const files = e.target.files || e.dataTransfer.files
+
+  for (const file of files) {
+    readFile(file).then((image) => {
+      images.value.push({
+        id: images.value.length + 1,
+        thumbnail: image
+      })
+    })
   }
 }
 
@@ -35,6 +41,16 @@ const upload = () => {
     console.log('post通信に成功しました');
   });
 };
+
+const dragEnter = () => {
+  console.log(`dragEnter`)
+  isEnter.value = true;
+}
+
+const dragLeave = () => {
+  console.log(`dragLeave`)
+  isEnter.value = false;
+}
 
 const deleteFile = (index) => {
   images.value.splice(index, 1)
@@ -52,17 +68,34 @@ const moveToRight = (passedIndex) => {
   <div class="uploader">
     <span class="leading-text">商品写真</span>
     <span class="foo">
-      <pera-image-list
-        class="thumbnails"
-        :images="images"
-        @left="moveToLeft"
-        @right="moveToRight"
-        @delete="deleteFile"
-      />
+      <div
+        class="drop-area"
+        @dragenter="dragEnter"
+        @dragleave="dragLeave"
+        @dragover.prevent
+        @drop.prevent="onFileSelect"
+        :class="{enter: isEnter}"
+      >
+        <span v-if="!images.length">画像を選択（またはドラッグアンドドロップ）してください</span>
+        <pera-image-list
+          v-else
+          :images="images"
+          @left="moveToLeft"
+          @right="moveToRight"
+          @delete="deleteFile"
+        />
+      </div>
       <div class="file-upload-area">
         <label for="file-upload" class="label-upload">
           <span class="icon"><icon-folder-open /></span>ファイルを選択する
-          <input type="file" accept="image/*" id="file-upload" @change="onFileSelect" ref="file">
+          <input
+            type="file"
+            accept="image/*"
+            id="file-upload"
+            @change="onFileSelect"
+            ref="file"
+            multiple
+          >
         </label>
       </div>
       <div class="button-area">
@@ -117,12 +150,23 @@ h3 {
   padding: 30px 0;
 }
 
-.thumbnails {
+.drop-area {
+  $padding-vertical: 10px;
+
+  box-sizing: border-box;
   width: 100%;
+  height: calc(#{$side-length-of-image} + #{$padding-vertical} * 2);
   display: flex;
   flex-direction: row;
-  overflow-x: scroll;
-  padding: 0 20px;
+  overflow: scroll hidden;
+  margin-left: 20px;
+  padding: $padding-vertical 20px;
+  background-color: #eee;
+  border: 2px solid #ccc;
+}
+
+.enter {
+  border: 10px dotted powderblue;
 }
 
 .button-area {
