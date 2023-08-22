@@ -7,21 +7,28 @@ import UploadButton from '@/components/atoms/UploadButton.vue'
 import IconFolderOpen from '@/components/icons/IconFolderOpen.vue'
 
 const images = ref([]);
+const readFile = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      const image = e.target.result
+      resolve(image)
+    }
+    reader.readAsDataURL(file)
+  })
+}
 
 const onFileSelect = (e) => {
   const files = e.target.files
   if (e.target instanceof HTMLInputElement) {
     if (files.length > 0) {
-      const file = files[0]
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        const image = e.target.result
+      // TODO: for loop
+      readFile(files[0]).then((image) => {
         images.value.push({
           id: images.value.length + 1,
           thumbnail: image
         })
-      }
-      reader.readAsDataURL(file)
+      })
     }
   } else {
     console.log(`e.target is not HTMLInputElement`)
