@@ -1,6 +1,4 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue';
-
 const emit = defineEmits(['click'])
 
 defineProps({
@@ -28,19 +26,18 @@ const handleClick = () => {
   >{{ text }}</button>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .upload-button {
-  /* TODO: implement some style on your favor */
   width: 100%;
   border: none;
   color: white;
   background-color: #03D5AC; /* spoited */
   border-radius: 3px;
   padding: 10px;
-}
 
-.upload-button:disabled {
-  opacity: 0.5;
-  background-color: #333;
+  &:disabled {
+    opacity: 0.5;
+    background-color: #333;
+  }
 }
 </style>
