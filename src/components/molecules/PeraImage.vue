@@ -36,6 +36,7 @@ defineProps({
 .pera-image {
   position: relative;
   display: inline-block;
+  height: $side-length-of-image;
 }
 
 .thumbnail {
