@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <span>
-    <ul v-if="images.length" class="fuga">
+    <ul class="fuga">
       <li v-for="(image, index) in images" :key="image.id">
         <pera-image
           :image="image"
@@ -22,9 +22,6 @@ defineProps({
         />
       </li>
     </ul>
-    <div v-else class="no-image">
-      <span class="text">画像を選択（またはドラッグアンドドロップ）してください</span>
-    </div>
   </span>
 </template>
 

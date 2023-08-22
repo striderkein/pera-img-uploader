@@ -7,6 +7,8 @@ import UploadButton from '@/components/atoms/UploadButton.vue'
 import IconFolderOpen from '@/components/icons/IconFolderOpen.vue'
 
 const images = ref([]);
+const isEnter = ref(false);
+
 const readFile = (file) => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
@@ -19,19 +21,20 @@ const readFile = (file) => {
 }
 
 const onFileSelect = (e) => {
-  const files = e.target.files
+  isEnter.value = false;
+  const files = e.target.files || e.dataTransfer.files
   if (e.target instanceof HTMLInputElement) {
-    if (files.length > 0) {
-      // TODO: for loop
-      readFile(files[0]).then((image) => {
-        images.value.push({
-          id: images.value.length + 1,
-          thumbnail: image
-        })
-      })
-    }
-  } else {
     console.log(`e.target is not HTMLInputElement`)
+    return
+  }
+
+  for (const file of files) {
+    readFile(file).then((image) => {
+      images.value.push({
+        id: images.value.length + 1,
+        thumbnail: image
+      })
+    })
   }
 }
 
@@ -42,6 +45,16 @@ const upload = () => {
     console.log('post通信に成功しました');
   });
 };
+
+const dragEnter = () => {
+  console.log(`dragEnter`)
+  isEnter.value = true;
+}
+
+const dragLeave = () => {
+  console.log(`dragLeave`)
+  isEnter.value = false;
+}
 
 const deleteFile = (index) => {
   images.value.splice(index, 1)
@@ -59,13 +72,23 @@ const moveToRight = (passedIndex) => {
   <div class="uploader">
     <span class="leading-text">商品写真</span>
     <span class="foo">
-      <pera-image-list
-        class="thumbnails"
-        :images="images"
-        @left="moveToLeft"
-        @right="moveToRight"
-        @delete="deleteFile"
-      />
+      <div
+        class="drop-area"
+        @dragenter="dragEnter"
+        @dragleave="dragLeave"
+        @dragover.prevent
+        @drop.prevent="onFileSelect"
+        :class="{enter: isEnter}"
+      >
+        <span v-if="!images.length">画像を選択（またはドラッグアンドドロップ）してください</span>
+        <pera-image-list
+          v-else
+          :images="images"
+          @left="moveToLeft"
+          @right="moveToRight"
+          @delete="deleteFile"
+        />
+      </div>
       <div class="file-upload-area">
         <label for="file-upload" class="label-upload">
           <span class="icon"><icon-folder-open /></span>ファイルを選択する
@@ -124,7 +147,7 @@ h3 {
   padding: 30px 0;
 }
 
-.thumbnails {
+.drop-area {
   $padding-vertical: 10px;
 
   box-sizing: border-box;
@@ -137,6 +160,10 @@ h3 {
   padding: $padding-vertical 20px;
   background-color: #eee;
   border: 2px solid #ccc;
+}
+
+.enter {
+  border: 10px dotted powderblue;
 }
 
 .button-area {
